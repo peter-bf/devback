@@ -26,5 +26,5 @@ def enforce_foreign_keys(dbapi_connection, connection_record):
 
 # Function to initialize database
 def init_db():
-    from models import Developer, Repository, Commit, developer_repository_association
+    from app.models import Developer, Repository, Commit, developer_repository_association
     Base.metadata.create_all(bind=engine)

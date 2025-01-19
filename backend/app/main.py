@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from database import init_db
-from routes import developers, repositories
+from app.database import init_db
+from app.routes import developers, repositories
 
 app = FastAPI()
 
