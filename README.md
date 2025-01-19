@@ -58,7 +58,7 @@ DevBack is our way of giving back to the developers who make this ecosystem poss
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/devback.git
+   git clone https://github.com/peter-bf/devback
    ```
 
 2. Navigate to the project directory:
@@ -72,14 +72,30 @@ DevBack is our way of giving back to the developers who make this ecosystem poss
    ```bash
    npm install
    ```
-
-4. Start the development server:
-
+   If any errors are caught type
    ```bash
-   npm start
+   npm install --ignore
    ```
 
-5. Open your browser and visit:
+4. Start the server on local host port:3000
+
+```bash
+npm run dev
+```
+
+5. Navigate into backend directory
+
+   ```bash
+   cd backend
+   ```
+
+6. Run backend on local machine
+
+   ```bash
+   uvicorn app.main:app
+   ```
+
+7. Open your browser and visit:
 
    ```
    http://localhost:3000
