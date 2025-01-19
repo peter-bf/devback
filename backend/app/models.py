@@ -1,7 +1,9 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Table
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, declarative_base
 from datetime import datetime
 from app.database import Base
+from pydantic import BaseModel
+from typing import List
 
 # Many-to-many association table between Developers and Repositories
 developer_repository_association = Table(
@@ -10,6 +12,18 @@ developer_repository_association = Table(
     Column("dev_id", Integer, ForeignKey("developers.dev_id"), primary_key=True),
     Column("repo_id", Integer, ForeignKey("repositories.repo_id"), primary_key=True),
 )
+
+# Pydantic Model for API Responses
+class DeveloperResponse(BaseModel):
+    dev_id: int
+    name: str
+    icon: str | None
+    num_commits: int
+    languages: str | None
+    top_repos: str | None
+
+    class Config:
+        orm_mode = True  # Enables automatic conversion from SQLAlchemy models
 
 # Developer Model
 class Developer(Base):
