@@ -9,4 +9,4 @@ init_db()
 
 # Include Routers
 app.include_router(developers.router, prefix="/api", tags=["Developers"])
-app.include_router(repositories.router, prefix="/api", tags=["Repositories"])s
+app.include_router(repositories.router, prefix="/api", tags=["Repositories"])

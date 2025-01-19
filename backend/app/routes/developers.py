@@ -18,7 +18,7 @@ def get_developers(db: Session = Depends(get_db)):
 
 @router.get("/developers/{developer_id}")
 def get_developer(developer_id: int, db: Session = Depends(get_db)):
-    developer = db.query(Developer).filter(Developer.id == developer_id).first()
+    developer = db.query(Developer).filter(Developer.dev_id == developer_id).first()
     if not developer:
         raise HTTPException(status_code=404, detail="Developer not found")
     return developer
