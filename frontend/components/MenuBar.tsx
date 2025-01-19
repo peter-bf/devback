@@ -32,7 +32,7 @@ const MenuBar = () => {
           <Link href="/search" className="text-gray-300 hover:text-white">Search</Link>
           <a href="#faq" onClick={scrollToFAQ} className="text-gray-300 hover:text-white">FAQ</a>
         </div>
-        <Button variant="outline" className="bg-gray-850 hover:bg-gray-800">
+        <Button variant="outline white-100" className="bg-gray-850 hover:bg-gray-800">
           <GithubIcon className="mr-2" size={20} />
           Login with GitHub
         </Button>

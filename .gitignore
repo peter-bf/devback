@@ -1,2 +1,6 @@
 frontend/node_modules/
 .DS_Store
+.next
+backend/app/routes/__pycache__/
+backend/app/__pycache__/
+backend/app/seed.py

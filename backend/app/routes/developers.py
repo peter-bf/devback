@@ -1,3 +1,4 @@
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.models import Developer
@@ -5,6 +6,7 @@ from app.database import SessionLocal
 
 router = APIRouter()
 
+# Dependency to get DB session
 def get_db():
     db = SessionLocal()
     try:
@@ -12,27 +14,38 @@ def get_db():
     finally:
         db.close()
 
+# GET all developers without limits
 @router.get("/developers")
 def get_developers(db: Session = Depends(get_db)):
-    return db.query(Developer).all()
+    developers = db.query(Developer).all()
+    if not developers:
+        raise HTTPException(status_code=404, detail="No developers found.")
+    return developers  # Returns raw SQLAlchemy objects
 
+
+# GET a specific developer by ID
 @router.get("/developers/{developer_id}")
 def get_developer(developer_id: int, db: Session = Depends(get_db)):
     developer = db.query(Developer).filter(Developer.dev_id == developer_id).first()
     if not developer:
-        raise HTTPException(status_code=404, detail="Developer not found")
+        raise HTTPException(status_code=404, detail="Developer not found.")
     return developer
 
-# Add a Developer to the Database
+# POST a new developer
 @router.post("/developers")
-def add_dev(dev_id: int, name: str, icon: str, db: Session = Depends(get_db)):
-    existing_dev = db.query(Developer).filter_by(dev_id=dev_id).first()
-    if existing_dev:
-        return {"message": "Developer already exists", "developer": existing_dev}
-
-    new_dev = Developer(dev_id=dev_id, name=name, icon=icon, num_commits=0, languages="", top_repos="")
-    db.add(new_dev)
+def create_developer(developer: dict, db: Session = Depends(get_db)):
+    new_developer = Developer(**developer)
+    db.add(new_developer)
     db.commit()
-    db.refresh(new_dev)
+    db.refresh(new_developer)
+    return new_developer
 
-    return {"message": "Developer added successfully", "developer": new_dev}
+
+# DELETE a developer by ID
+@router.delete("/developers/{developer_id}", status_code=204)
+def delete_developer(developer_id: int, db: Session = Depends(get_db)):
+    developer = db.query(Developer).filter(Developer.id == developer_id).first()
+    if not developer:
+        raise HTTPException(status_code=404, detail="Developer not found.")
+    db.delete(developer)
+    db.commit()
