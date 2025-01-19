@@ -10,7 +10,7 @@ export async function GET(request: Request) {
   // For this example, we'll generate mock data
   const repositories = [...Array(limit)].map((_, i) => ({
     id: (page - 1) * limit + i + 1,
-    name: `Repository ${(page - 1) * limit + i + 1}`,
+    name: `Repository${(page - 1) * limit + i + 1}`,
     icon: '📁',
     starCount: Math.floor(Math.random() * 1000),
     description: `This is a description for Repository ${(page - 1) * limit + i + 1}.`

@@ -19,7 +19,7 @@ const MenuBar = () => {
   }
 
   return (
-    <nav className="bg-gray-900 p-4 sticky top-0 z-50 border-b border-gray-800">
+    <nav className="bg-gray-950 p-4 sticky top-0 z-50 border-b border-gray-800">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center space-x-6">
           <Link href="/" className="flex items-center">
@@ -32,7 +32,7 @@ const MenuBar = () => {
           <Link href="/search" className="text-gray-300 hover:text-white">Search</Link>
           <a href="#faq" onClick={scrollToFAQ} className="text-gray-300 hover:text-white">FAQ</a>
         </div>
-        <Button variant="outline" className="bg-transparent hover:bg-gray-800">
+        <Button variant="outline" className="bg-gray-850 hover:bg-gray-800">
           <GithubIcon className="mr-2" size={20} />
           Login with GitHub
         </Button>

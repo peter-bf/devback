@@ -4,9 +4,9 @@ import FAQSection from '@/components/FAQSection'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+    <div className="min-h-screen bg-gray-900">
+      <Hero />
       <div className="container mx-auto px-4 space-y-4">
-        <Hero />
         <TrendingSection />
         <FAQSection />
       </div>

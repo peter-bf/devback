@@ -10,14 +10,9 @@ export async function GET(request: Request) {
   // For this example, we'll generate mock data
   const users = [...Array(limit)].map((_, i) => ({
     id: (page - 1) * limit + i + 1,
-    name: `User ${(page - 1) * limit + i + 1}`,
+    name: `User${(page - 1) * limit + i + 1}`,
     icon: '👤',
     repoCount: Math.floor(Math.random() * 50),
-    languages: {
-      JavaScript: Math.floor(Math.random() * 100),
-      TypeScript: Math.floor(Math.random() * 100),
-      Python: Math.floor(Math.random() * 100),
-    }
   })).filter(user => user.name.toLowerCase().includes(search.toLowerCase()))
 
   return NextResponse.json(users)

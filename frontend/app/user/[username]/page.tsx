@@ -3,16 +3,24 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import RepositoryCard from '@/components/RepositoryCard'
+import { templateDevelopers } from '@/lib/templateData'
+import LanguageBar from '@/components/LanguageBar'
+import { GitCommit, FolderGit2 } from 'lucide-react'
 
 interface User {
   name: string
   description: string
-  avatarUrl: string
+  icon: string
+  repoCount: number
+  commitCount: number
+  languages: { name: string; percentage: number }[]
   repositories: {
+    id: number
     name: string
     icon: string
     starCount: number
     description: string
+    languages: { name: string; percentage: number }[]
   }[]
 }
 
@@ -24,23 +32,13 @@ export default function UserPage({ params }: { params: { username: string } }) {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`/api/user/${params.username}`)
-        if (!response.ok) throw new Error('Failed to fetch user data')
-        const data = await response.json()
-        setUser(data)
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 500))
+        const foundUser = templateDevelopers.find(dev => dev.name.toLowerCase() === params.username.toLowerCase())
+        if (!foundUser) throw new Error('User not found')
+        setUser(foundUser)
       } catch (err) {
-        setError('Failed to load user data. Please try again.')
-        // If API fails, set template data
-        setUser({
-          name: params.username,
-          description: 'This is a template user description.',
-          avatarUrl: `https://github.com/${params.username}.png`,
-          repositories: [
-            { name: 'Repo 1', icon: '📁', starCount: 120, description: 'Template repository 1' },
-            { name: 'Repo 2', icon: '📁', starCount: 85, description: 'Template repository 2' },
-            { name: 'Repo 3', icon: '📁', starCount: 230, description: 'Template repository 3' },
-          ]
-        })
+        setError('User not found')
       } finally {
         setLoading(false)
       }
@@ -57,7 +55,7 @@ export default function UserPage({ params }: { params: { username: string } }) {
     <div className="container mx-auto px-4 py-12">
       <div className="text-center mb-12">
         <Image
-          src={user.avatarUrl || "/placeholder.svg"}
+          src={user.icon || "/placeholder.svg"}
           alt={user.name}
           width={200}
           height={200}
@@ -65,14 +63,36 @@ export default function UserPage({ params }: { params: { username: string } }) {
         />
         <h1 className="text-4xl font-bold mb-4">{user.name}</h1>
         <p className="text-xl mb-6">{user.description}</p>
-        <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300">
-          Donate
-        </button>
+        <div className="flex justify-center items-center space-x-4 mb-6">
+          <span className="flex items-center text-gray-400">
+            <FolderGit2 size={20} className="mr-2" />
+            {user.repoCount} repositories
+          </span>
+          <span className="flex items-center text-gray-400">
+            <GitCommit size={20} className="mr-2" />
+            {user.commitCount} commits
+          </span>
+        </div>
+        <div className="max-w-md mx-auto mb-6">
+          <LanguageBar languages={user.languages} />
+        </div>
+        <div className="flex justify-center">
+          <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-300 flex items-center text-lg">
+            <Image
+              src="https://cryptologos.cc/logos/starknet-token-strk-logo.svg?v=040"
+              alt="Starknet Logo"
+              width={28}
+              height={28}
+              className="mr-2"
+            />
+            Donate
+          </button>
+        </div>
       </div>
       <h2 className="text-2xl font-bold mb-6">Repositories</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {user.repositories.map((repo, index) => (
-          <RepositoryCard key={index} repo={repo} />
+        {user.repositories.map((repo) => (
+          <RepositoryCard key={repo.id} repo={repo} />
         ))}
       </div>
     </div>

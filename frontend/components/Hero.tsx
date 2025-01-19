@@ -56,7 +56,7 @@ const Hero = () => {
   }
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-b from-gray-800 to-gray-900 w-full">
+    <div className="relative overflow-hidden w-full bg-gray-900">
       <div className="container mx-auto px-4 py-16 flex flex-col md:flex-row items-center">
         <div className="md:w-1/2 mb-8 md:mb-0 z-10">
           <h1 className="text-4xl font-bold mb-4">Welcome to Our Platform</h1>
@@ -94,6 +94,7 @@ const Hero = () => {
           </svg>
         </div>
       </div>
+      <div className="w-full h-px bg-white/10"></div>
     </div>
   )
 }

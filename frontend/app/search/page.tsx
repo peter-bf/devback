@@ -1,70 +1,24 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
-import Link from 'next/link'
+import { useState, useEffect } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import UserCard from '@/components/UserCard'
 import RepositoryCard from '@/components/RepositoryCard'
-import { debounce } from 'lodash'
+import { templateDevelopers, templateRepositories } from '@/lib/templateData'
 
-const ITEMS_PER_PAGE = 20
+const ITEMS_PER_PAGE = 10
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState('')
   const [searchType, setSearchType] = useState('user')
   const [items, setItems] = useState<any[]>([])
-  const [page, setPage] = useState(1)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-
-  const fetchItems = useCallback(async () => {
-    setLoading(true)
-    setError(null)
-    try {
-      const response = await fetch(`/api/${searchType}s?search=${searchTerm}&page=${page}&limit=${ITEMS_PER_PAGE}`)
-      if (!response.ok) throw new Error('Failed to fetch data')
-      const data = await response.json()
-      setItems(prevItems => [...prevItems, ...data])
-      setPage(prevPage => prevPage + 1)
-    } catch (err) {
-      setError('Failed to load data. Please try again.')
-      if (items.length === 0) {
-        // Only add template items if there are no items yet
-        setItems([...Array(10)].map((_, i) => ({
-          id: `template-${i}`,
-          name: `Template ${searchType} ${i + 1}`,
-          icon: searchType === 'user' ? '👤' : '📁',
-          repoCount: 10,
-          starCount: 100,
-          languages: { JavaScript: 50, TypeScript: 30, Python: 20 },
-          description: `This is a template ${searchType} description.`
-        })))
-      }
-    } finally {
-      setLoading(false)
-    }
-  }, [searchTerm, searchType, page, items.length])
 
   useEffect(() => {
-    setItems([])
-    setPage(1)
-  }, [searchTerm, searchType])
-
-  useEffect(() => {
-    if (page === 1) fetchItems()
-  }, [fetchItems, page])
-
-  const handleScroll = useCallback(() => {
-    if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || loading) {
-      return
-    }
-    fetchItems()
-  }, [fetchItems, loading])
-
-  useEffect(() => {
-    const debouncedHandleScroll = debounce(handleScroll, 100)
-    window.addEventListener('scroll', debouncedHandleScroll)
-    return () => window.removeEventListener('scroll', debouncedHandleScroll)
-  }, [handleScroll])
+    const filteredItems = searchType === 'user' 
+      ? templateDevelopers.filter(dev => dev.name.toLowerCase().includes(searchTerm.toLowerCase()))
+      : templateRepositories.filter(repo => repo.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    setItems(filteredItems.slice(0, ITEMS_PER_PAGE));
+  }, [searchTerm, searchType]);
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -94,7 +48,7 @@ export default function Search() {
               onChange={() => setSearchType('user')}
               className="hidden"
             />
-            <span className={`px-4 py-2 rounded-md w-24 text-center ${searchType === 'user' ? 'bg-gray-700 text-white' : 'text-gray-400 hover:text-gray-200'}`}>User</span>
+            <span className={`px-4 py-2 rounded-md w-24 text-center ${searchType === 'user' ? 'bg-gray-700 text-white' : 'text-gray-400 hover:text-gray-200'}`}>Users</span>
           </label>
           <label className="flex items-center cursor-pointer">
             <input
@@ -110,14 +64,16 @@ export default function Search() {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {items.map((item) => (
-          searchType === 'user'
-            ? <UserCard key={item.id} user={item} />
-            : <RepositoryCard key={item.id} repo={item} />
-        ))}
+        {items && items.length > 0 ? (
+          items.map((item) => (
+            searchType === 'user'
+              ? <UserCard key={item.id} user={item} />
+              : <RepositoryCard key={item.id} repo={item} />
+          ))
+        ) : (
+          <p className="col-span-3 text-center mt-4">No results found.</p>
+        )}
       </div>
-      {loading && <p className="text-center mt-4">Loading...</p>}
-      {error && items.length === 0 && <p className="text-center mt-4 text-red-500">{error}</p>}
     </div>
   )
 }

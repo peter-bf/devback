@@ -7,6 +7,8 @@
   --background-start-rgb: 10, 13, 18;
   --background-mid-rgb: 18, 22, 28;
   --background-end-rgb: 10, 13, 18;
+  --card-background: 22, 27, 34;
+  --card-background-lighter: 13, 17, 23;
 
   /* Language colors */
   --lang-javascript: #f1e05a;
@@ -17,14 +19,14 @@
   --lang-ruby: #701516;
   --lang-css: #563d7c;
   --lang-html: #e34c26;
-  --lang-c-sharp: #178600;
+  --lang-csharp: #178600;
   --lang-go: #00add8;
   --lang-rust: #dea584;
   --lang-swift: #ffac45;
 
   --background: 10 10 10;
   --foreground: 240 240 240;
-  --card: 20 20 20;
+  --card: 13 17 23;
   --card-foreground: 240 240 240;
   --popover: 20 20 20;
   --popover-foreground: 240 240 240;
@@ -96,11 +98,16 @@ body {
   border-radius: 4px;
   font-size: 12px;
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s;
+  opacity: 1;
 }
 
-.language-bar:hover .language-tooltip {
-  opacity: 1;
+.fixed-height-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.bg-gray-850 {
+  background-color: rgb(var(--card-background));
 }
 
