@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import init_db
-from app.routes import developers, repositories
+from app.routes import developers, repositories, transfer
+
 
 app = FastAPI()
 
@@ -10,8 +11,9 @@ init_db()
 
 # Configure CORS
 origins = [
-    "http://localhost:3000",  # React frontend
-    "http://127.0.0.1:3000",   # Alternative localhost access
+    "http://localhost:4000",  # React frontend
+    "http://127.0.0.1:4000",
+    "http://127.0.0.1:5050"   # Alternative localhost access
 ]
 
 app.add_middleware(
@@ -30,3 +32,4 @@ def root():
 # Include Routers
 app.include_router(developers.router, prefix="/api", tags=["Developers"])
 app.include_router(repositories.router, prefix="/api", tags=["Repositories"])
+app.include_router(transfer.router, prefix="/api", tags=["Transfer"])

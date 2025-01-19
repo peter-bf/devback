@@ -15,6 +15,39 @@ interface User {
   languages: string | null
 }
 
+
+const handleDonate = async () => {
+  const transferData = {
+    address: "0x064b48806902a367c8598f4F95C305e8c1a1aCbA5f082D294a43793113115691",
+    amount: 1500000000000000, // Hardcoded amount
+  };
+
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/transfer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(transferData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Transfer failed:", errorData);
+      alert(`Transfer failed: ${errorData.detail}`);
+      return;
+    }
+
+    const result = await response.json();
+    console.log("Transfer successful:", result);
+    alert(`Transfer successful!'`);
+  } catch (error) {
+    console.error("Error during transfer:", error);
+    alert("An error occurred during the transfer.");
+  }
+};
+
+
 export default function UserPage({ params }: { params: { username: string } }) {
   const [user, setUser] = useState<User | null>(null)
   const [userRepositories, setUserRepositories] = useState([]);
@@ -70,7 +103,9 @@ export default function UserPage({ params }: { params: { username: string } }) {
           </div>
         )}
         <div className="flex justify-center">
-          <button className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-300 flex items-center text-lg">
+          <button 
+          onClick={handleDonate}
+          className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-300 flex items-center text-lg">
             <Image
               src="https://cryptologos.cc/logos/starknet-token-strk-logo.svg?v=040"
               alt="Starknet Logo"
@@ -78,7 +113,7 @@ export default function UserPage({ params }: { params: { username: string } }) {
               height={28}
               className="mr-1"
             />
-            Donate
+            Donate 5 USD
           </button>
         </div>
       </div>
