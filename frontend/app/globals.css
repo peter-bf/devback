@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 10, 13, 18;
+  --background-mid-rgb: 18, 22, 28;
+  --background-end-rgb: 10, 13, 18;
+
+  /* Language colors */
+  --lang-javascript: #f1e05a;
+  --lang-typescript: #2b7489;
+  --lang-python: #3572a5;
+  --lang-java: #b07219;
+  --lang-kotlin: #f18e33;
+  --lang-ruby: #701516;
+  --lang-css: #563d7c;
+  --lang-html: #e34c26;
+  --lang-c-sharp: #178600;
+  --lang-go: #00add8;
+  --lang-rust: #dea584;
+  --lang-swift: #ffac45;
+
+  --background: 10 10 10;
+  --foreground: 240 240 240;
+  --card: 20 20 20;
+  --card-foreground: 240 240 240;
+  --popover: 20 20 20;
+  --popover-foreground: 240 240 240;
+  --primary: 60 60 60;
+  --primary-foreground: 240 240 240;
+  --secondary: 30 30 30;
+  --secondary-foreground: 240 240 240;
+  --muted: 40 40 40;
+  --muted-foreground: 180 180 180;
+  --accent: 50 50 50;
+  --accent-foreground: 240 240 240;
+  --destructive: 180 40 40;
+  --destructive-foreground: 240 240 240;
+  --border: 40 40 40;
+  --input: 30 30 30;
+  --ring: 60 60 60;
+  --radius: 0.5rem;
+}
+
+body {
+  color: rgb(var(--foreground));
+  background-color: rgb(var(--background));
+  min-height: 100vh;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+}
+
+.hover\:shadow-xl:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+}
+
+.section-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 2rem 0;
+}
+
+.github-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.github-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.rounded-custom {
+  border-radius: 6px;
+}
+
+.language-bar {
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.language-tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.language-bar:hover .language-tooltip {
+  opacity: 1;
+}
+
