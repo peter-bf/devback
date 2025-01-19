@@ -61,10 +61,11 @@ DevBack is our way of giving back to the developers who make this ecosystem poss
    git clone https://github.com/peter-bf/devback
    ```
 
-2. Navigate to the project directory:
+2. Navigate to the frontend directory:
 
    ```bash
    cd devback
+   cd frontend
    ```
 
 3. Install dependencies:
@@ -72,9 +73,9 @@ DevBack is our way of giving back to the developers who make this ecosystem poss
    ```bash
    npm install
    ```
-   If any errors are caught type
+   If any errors occur, do
    ```bash
-   npm install --ignore
+   npm install --legacy-peer-deps
    ```
 
 4. Start the server on local host port:3000
@@ -86,7 +87,7 @@ npm run dev
 5. Navigate into backend directory
 
    ```bash
-   cd backend
+   cd ../backend
    ```
 
 6. Run backend on local machine
