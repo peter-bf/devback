@@ -80,9 +80,9 @@ DevBack is our way of giving back to the developers who make this ecosystem poss
 
 4. Start the server on local host port:3000
 
-```bash
-npm run dev
-```
+   ```bash
+   npm run dev
+   ```
 
 5. Navigate into backend directory
 
