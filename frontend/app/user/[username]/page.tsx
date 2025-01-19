@@ -40,7 +40,7 @@ const handleDonate = async () => {
 
     const result = await response.json();
     console.log("Transfer successful:", result);
-    alert(`Transfer successful!'`);
+    alert(`Transfer successful!`);
   } catch (error) {
     console.error("Error during transfer:", error);
     alert("An error occurred during the transfer.");
