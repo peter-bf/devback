@@ -28,9 +28,18 @@ const MenuBar = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
           </Link>
-          <Link href="/" className="text-gray-300 hover:text-white">Home</Link>
-          <Link href="/search" className="text-gray-300 hover:text-white">Search</Link>
-          <a href="#faq" onClick={scrollToFAQ} className="text-gray-300 hover:text-white">FAQ</a>
+          <Link href="/" className="text-gray-300 hover:text-white transition duration-300 ease-in-out relative group">
+            Home
+            <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></span>
+          </Link>
+          <Link href="/search" className="text-gray-300 hover:text-white transition duration-300 ease-in-out relative group">
+            Search
+            <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></span>
+          </Link>
+          <a href="#faq" onClick={scrollToFAQ} className="text-gray-300 hover:text-white transition duration-300 ease-in-out relative group">
+            FAQ
+            <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></span>
+          </a>
         </div>
         <Button variant="outline white-100" className="bg-gray-850 hover:bg-gray-800">
           <GithubIcon className="mr-2" size={20} />
@@ -42,4 +51,3 @@ const MenuBar = () => {
 }
 
 export default MenuBar
-

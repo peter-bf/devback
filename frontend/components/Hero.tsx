@@ -59,8 +59,8 @@ const Hero = () => {
     <div className="relative overflow-hidden w-full bg-gray-900">
       <div className="container mx-auto px-4 py-16 flex flex-col md:flex-row items-center">
         <div className="md:w-1/2 mb-8 md:mb-0 z-10">
-          <h1 className="text-4xl font-bold mb-4">Welcome to Our Platform</h1>
-          <p className="text-xl mb-6">Discover amazing projects and connect with developers from around the world.</p>
+          <h1 className="text-4xl font-bold mb-4">Welcome to DevBack!</h1>
+          <p className="text-xl mb-6">Support amazing open-source projects and connect with developers from around the world.</p>
           <Button
             asChild
             variant="outline"

@@ -9,6 +9,10 @@ const FAQSection = () => {
 
   const faqs = [
     {
+      question: 'What is Starknet?',
+      answer: 'Starknet is a cutting-edge Layer 2 scaling solution for Ethereum, leveraging ZK-Rollups to deliver fast, secure, and low-cost transactions without compromising decentralization. DevBack has incorporated Starknet as its blockchain service to facilitate seamless and transparent donations.'
+    },
+    {
       question: 'What is this platform about?',
       answer: 'This platform is designed to connect developers and showcase projects from around the world.'
     },
@@ -18,11 +22,7 @@ const FAQSection = () => {
     },
     {
       question: 'Is it free to use?',
-      answer: 'Yes, our basic features are free to use. We also offer premium plans for advanced features.'
-    },
-    {
-      question: 'How can I contact support?',
-      answer: 'You can reach our support team by emailing support@example.com or through the contact form on our website.'
+      answer: 'Yes. All of our features are free to use.'
     }
   ]
 

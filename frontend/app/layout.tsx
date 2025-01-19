@@ -18,6 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <link rel="icon" href="/img/icon.png" type="image/png" />
+      </head>
       <body className={`${inter.className} bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-gray-100 min-h-screen flex flex-col`}>
         <MenuBar />
         <main className="flex-grow">
@@ -28,4 +31,3 @@ export default function RootLayout({
     </html>
   )
 }
-
